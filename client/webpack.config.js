@@ -1,40 +1,44 @@
-const path = require('path')
-const htmlPlugin = require('html-webpack-plugin')
+const path = require("path");
+const htmlPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: "development",
-    entry: path.join(__dirname, 'src'),
+    entry: path.join(__dirname, "src"),
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename:'main.js',
-        publicPath:'/',
-        sourceMapFilename: 'main.js.map'
+        path: path.join(__dirname, "dist"),
+        filename: "[main].js",
+        publicPath: "/",
+        sourceMapFilename: "[file].map[query]",
     },
-    devtool: 'source-map',
+    devtool: "source-map",
     devServer: {
-        static: {directory:path.join(__dirname,'dist')},
+        static: { directory: path.join(__dirname, "dist") },
         compress: true,
         port: 3000,
-        historyApiFallback: true
+        historyApiFallback: true,
     },
-    module:{
+    module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                exclude: /node-modules/,
-                use: ['babel-loader']
+                exclude: /node_modules/,
+                use: ["babel-loader"],
             },
             {
-                test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
-                use: 'file-loader'
-            }
-        ]
+                test: /\.(ttf|eot|svg|gif|jpg|png|)(\?[\s\S]+)?$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                    },
+                ],
+            },
+        ],
     },
     plugins: [
         new htmlPlugin({
-            title: 'Membership Application',
-            favicon: './src/assets/paragon.png',
-            template: './src/assets/index.html'
-        })
-    ]
-}
+            title: "Membership Application",
+            favicon: "./src/assets/paragon.png",
+            template: "./src/assets/index.html",
+        }),
+    ],
+};
