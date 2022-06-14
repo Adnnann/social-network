@@ -6,7 +6,7 @@ User can also follow or unfollow other users and get complete overview of follow
 
 ## Seed 
 
-By running <code>node seed</code> on folder server user is enables to create eight dummy users for testing purposes.
+By running <code>node seed</code> on folder server user is enabled to create and store i database 8 dummy users for testing purposes.
 
 ## UI
 
