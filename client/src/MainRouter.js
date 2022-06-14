@@ -12,7 +12,7 @@ import { Container, Grid } from "@material-ui/core";
 
 const MainRouter = () => {
   return (
-    <Grid container>
+    <>
       <Menu />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -22,7 +22,7 @@ const MainRouter = () => {
         <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
         <Route path="/user/:userId" component={Profile} />
       </Switch>
-    </Grid>
+    </>
   );
 };
 

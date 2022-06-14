@@ -7,16 +7,13 @@ import {
   CardMedia,
   Typography,
   Grid,
+  Container,
 } from "@material-ui/core";
 import mistralImg from "../assets/images/mistral.jpg";
 import FindPeople from "../user/FindPeople";
 import Newsfeed from "../post/Newsfeed";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    margin: 30,
-  },
   card: {
     maxWidth: 600,
     margin: "auto",
@@ -30,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.openTitle,
   },
   media: {
-    minHeight: 400,
+    minHeight: 200,
   },
   credit: {
     padding: 10,
@@ -58,9 +55,14 @@ const Home = ({ history }) => {
   }, []);
 
   return (
-    <>
-      <Grid container spacing={8} justifyContent="center">
-        <Grid item xs={12} md={6} lg={4} xl={4}>
+    <Container>
+      <Grid
+        container
+        spacing={8}
+        justifyContent="center"
+        style={{ overflow: "none" }}
+      >
+        <Grid item xs={12} md={6} lg={4} xl={6}>
           <Card style={{ marginTop: "20px", marginBottom: "20px" }}>
             <Typography variant="h4" className={classes.title}>
               Home Page
@@ -88,16 +90,16 @@ const Home = ({ history }) => {
         </Grid>
       </Grid>
       {defaultPage && (
-        <Grid container spacing={8} justifyContent="center">
-          <Grid item xs={8} md={8} lg={6} xl={6}>
+        <Grid container justifyContent="center" spacing={2}>
+          <Grid item xs={12} md={5} lg={5} xl={5}>
             <Newsfeed />
           </Grid>
-          <Grid item xs={6} sm={5}>
+          <Grid item xs={12} md={5} lg={5} xl={5}>
             <FindPeople />
           </Grid>
         </Grid>
       )}
-    </>
+    </Container>
   );
 };
 
