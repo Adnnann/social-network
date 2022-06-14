@@ -8,63 +8,48 @@ import FollowGrid from "./../user/FollowGrid";
 // import PostList from "./../post/PostList";
 
 export default function ProfileTabs(props) {
-    const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(0);
 
-    const handleTabChange = (event, value) => {
-        setTab(value);
-    };
+  const handleTabChange = (event, value) => {
+    setTab(value);
+  };
 
-    return (
-        <div>
-            <AppBar position="static" color="default">
-                <Tabs
-                    value={tab}
-                    onChange={handleTabChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="fullWidth"
-                >
-                    {/* <Tab label="Posts" /> */}
-                    <Tab label="Following" />
-                    <Tab label="Followers" />
-                </Tabs>
-            </AppBar>
-            {/* {tab === 0 && (
-                <TabContainer>
-                    <PostList
-                        removeUpdate={props.removePostUpdate}
-                        posts={props.posts}
-                    />
-                </TabContainer>
-            )} */}
-            {tab === 0 && (
-                <TabContainer>
-                    <FollowGrid people={props.user.following} />
-                </TabContainer>
-            )}
-            {tab === 1 && (
-                <TabContainer>
-                    <FollowGrid people={props.user.followers} />
-                </TabContainer>
-            )}
-        </div>
-    );
+  return (
+    <>
+      <div>
+        <Tabs
+          value={tab}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+        >
+          <Tab label="Following" />
+          <Tab label="Followers" />
+        </Tabs>
+      </div>
+      {tab === 0 ? (
+        <TabContainer>
+          <FollowGrid people={props.user.following} />
+        </TabContainer>
+      ) : null}
+      {tab === 1 ? (
+        <TabContainer>
+          <FollowGrid people={props.user.followers} />
+        </TabContainer>
+      ) : null}
+    </>
+  );
 }
 
 ProfileTabs.propTypes = {
-    user: PropTypes.object.isRequired,
-    // removePostUpdate: PropTypes.func.isRequired,
-    // posts: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const TabContainer = (props) => {
-    return (
-        <Typography component="div" style={{ padding: 8 * 2 }}>
-            {props.children}
-        </Typography>
-    );
+  return <Typography component="div">{props.children}</Typography>;
 };
 
 TabContainer.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
