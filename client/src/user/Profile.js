@@ -22,9 +22,16 @@ import FollowProfileButton from "../user/FollowProfileButton";
 import ProfileTabs from "../user/ProfileTabs";
 
 const useStyles = makeStyles((theme) => ({
-  root: { height: "100%" },
+  root: {
+    marginTop: "50px",
+    paddingTop: "5px",
+    paddingLeft: "10px",
+    minWidth: 600,
+    [theme.breakpoints.only("xs")]: {
+      minWidth: 600,
+    },
+  },
   title: {
-    marginTop: theme.spacing(3),
     color: theme.palette.protectedTitle,
   },
 }));
@@ -96,50 +103,48 @@ const Profile = ({ match }) => {
 
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={12} md={6} lg={4} xl={4}>
-        <Paper className={classes.root}>
-          <Typography variant="h6" className={classes.title}>
-            Profile
-          </Typography>
-          <List dense>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar src={photoUrl} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={values.user.name}
-                secondary={values.user.email}
+      <Paper className={classes.root}>
+        <Typography variant="h6" className={classes.title}>
+          Profile
+        </Typography>
+        <List dense>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar src={photoUrl} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={values.user.name}
+              secondary={values.user.email}
+            />
+            {auth.isAuthenticated().user &&
+            auth.isAuthenticated().user._id == values.user._id ? (
+              <ListItemSecondaryAction>
+                <Link to={"/user/edit/" + values.user._id}>
+                  <IconButton aria-label="Edit" color="primary">
+                    <Edit />
+                  </IconButton>
+                </Link>
+                <DeleteUser userId={values.user._id} />
+              </ListItemSecondaryAction>
+            ) : (
+              <FollowProfileButton
+                following={values.following}
+                onButtonClick={clickFollowButton}
               />
-              {auth.isAuthenticated().user &&
-              auth.isAuthenticated().user._id == values.user._id ? (
-                <ListItemSecondaryAction>
-                  <Link to={"/user/edit/" + values.user._id}>
-                    <IconButton aria-label="Edit" color="primary">
-                      <Edit />
-                    </IconButton>
-                  </Link>
-                  <DeleteUser userId={values.user._id} />
-                </ListItemSecondaryAction>
-              ) : (
-                <FollowProfileButton
-                  following={values.following}
-                  onButtonClick={clickFollowButton}
-                />
-              )}
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={values.user.about}
-                secondary={
-                  "Joined: " + new Date(values.user.created).toDateString()
-                }
-              />
-            </ListItem>
-          </List>
-          <ProfileTabs user={values.user} />
-        </Paper>
-      </Grid>
+            )}
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText
+              primary={values.user.about}
+              secondary={
+                "Joined: " + new Date(values.user.created).toDateString()
+              }
+            />
+          </ListItem>
+        </List>
+        <ProfileTabs user={values.user} />
+      </Paper>
     </Grid>
   );
 };

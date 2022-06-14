@@ -61,7 +61,7 @@ const Home = ({ history }) => {
     <>
       <Grid container spacing={8} justifyContent="center">
         <Grid item xs={12} md={6} lg={4} xl={4}>
-          <Card style={{ marginTop: "20px" }}>
+          <Card style={{ marginTop: "20px", marginBottom: "20px" }}>
             <Typography variant="h4" className={classes.title}>
               Home Page
             </Typography>

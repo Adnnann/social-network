@@ -8,24 +8,22 @@ import Signup from "./user/Signup";
 import Signin from "./auth/Signin";
 import PrivateRoute from "./auth/PrivateRoute";
 import Menu from "./core/Menu";
+import { Container, Grid } from "@material-ui/core";
 
 const MainRouter = () => {
-    return (
-        <>
-            <Menu />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/users" component={Users} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/signin" component={Signin} />
-                <PrivateRoute
-                    path="/user/edit/:userId"
-                    component={EditProfile}
-                />
-                <Route path="/user/:userId" component={Profile} />
-            </Switch>
-        </>
-    );
+  return (
+    <Grid container>
+      <Menu />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/users" component={Users} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={Signin} />
+        <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
+        <Route path="/user/:userId" component={Profile} />
+      </Switch>
+    </Grid>
+  );
 };
 
 export default MainRouter;

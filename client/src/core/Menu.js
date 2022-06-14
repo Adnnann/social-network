@@ -54,7 +54,12 @@ const Menu = ({ history }) => {
         {!auth.isAuthenticated() && (
           <span>
             <Link to="/signup" className={classes.links}>
-              <Button style={isActive(history, "/signup")}>Sign Up</Button>
+              <Button
+                style={isActive(history, "/signup")}
+                className={classes.buttons}
+              >
+                Sign Up
+              </Button>
             </Link>
 
             <Link to="/signin" className={classes.links}>
