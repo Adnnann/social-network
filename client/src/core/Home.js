@@ -56,12 +56,7 @@ const Home = ({ history }) => {
 
   return (
     <Container>
-      <Grid
-        container
-        spacing={8}
-        justifyContent="center"
-        style={{ overflow: "none" }}
-      >
+      <Grid container justifyContent="center" style={{ overflow: "none" }}>
         <Grid item xs={12} md={6} lg={4} xl={6}>
           <Card style={{ marginTop: "20px", marginBottom: "20px" }}>
             <Typography variant="h4" className={classes.title}>

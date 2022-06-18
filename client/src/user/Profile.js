@@ -92,7 +92,6 @@ const Profile = ({ match }) => {
       }
     });
   };
-
   const photoUrl = values.user._id
     ? `http://localhost:4400/api/users/photo/${
         values.user._id

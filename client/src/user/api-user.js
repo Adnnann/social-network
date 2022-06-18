@@ -79,7 +79,6 @@ const remove = async (params, credentials) => {
 };
 
 const follow = async (params, credentials, followId) => {
-  console.log(params.userId, followId);
   try {
     let response = await fetch(`${baseUrl}/api/follow`, {
       method: "PUT",

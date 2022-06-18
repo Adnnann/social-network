@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import GridList from "@material-ui/core/ImageList";
 import { ImageListItem } from "@material-ui/core";
+import { listByUser } from "../post/api-post";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
 }));
-export default function FollowGrid({ people }) {
+export default function FollowGrid({ people, getUserPosts }) {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <GridList
@@ -41,7 +43,11 @@ export default function FollowGrid({ people }) {
       >
         {people.map((person, index) => {
           return (
-            <ImageListItem style={{ height: 120 }} key={index}>
+            <ImageListItem
+              style={{ height: 120 }}
+              key={index}
+              onClick={getUserPosts}
+            >
               <Link to={"/user/" + person._id}>
                 <Avatar
                   src={`http://localhost:4400/api/users/photo/${
