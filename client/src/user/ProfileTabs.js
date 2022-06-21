@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FollowGrid from "./../user/FollowGrid";
-import Newsfeed from "../post/Newsfeed";
 import PostList from "../post/PostList";
 import { listByUser } from "../post/api-post";
-// import PostList from "./../post/PostList";
 
 export default function ProfileTabs(props) {
   const [tab, setTab] = useState(0);
@@ -17,18 +14,14 @@ export default function ProfileTabs(props) {
   const id = useParams().userId;
 
   useEffect(() => {
-    getUserPosts();
+    listByUser(id)
+      .then((response) => setPosts(response))
+      .catch((err) => console.log(err));
     setTab(0);
   }, [id]);
 
   const handleTabChange = (event, value) => {
     setTab(value);
-  };
-
-  const getUserPosts = () => {
-    listByUser(id)
-      .then((response) => setPosts(response))
-      .catch((err) => console.log(err));
   };
 
   const removePost = (post) => {
@@ -70,10 +63,7 @@ export default function ProfileTabs(props) {
       ) : null}
       {tab === 1 ? (
         <TabContainer>
-          <FollowGrid
-            people={props.user.following}
-            getUserPosts={getUserPosts}
-          />
+          <FollowGrid people={props.user.following} />
         </TabContainer>
       ) : null}
       {tab === 2 ? (

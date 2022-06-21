@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
 }));
-export default function FollowGrid({ people, getUserPosts }) {
+export default function FollowGrid({ people }) {
   const classes = useStyles();
 
   return (
@@ -43,11 +43,7 @@ export default function FollowGrid({ people, getUserPosts }) {
       >
         {people.map((person, index) => {
           return (
-            <ImageListItem
-              style={{ height: 120 }}
-              key={index}
-              onClick={getUserPosts}
-            >
+            <ImageListItem style={{ height: 120 }} key={index}>
               <Link to={"/user/" + person._id}>
                 <Avatar
                   src={`http://localhost:4400/api/users/photo/${
